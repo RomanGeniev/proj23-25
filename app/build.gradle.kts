@@ -50,7 +50,7 @@ android {
 }
 
 dependencies {
-
+    runtimeOnly("androidx.lifecycle:lifecycle-livedata:2.8.7")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

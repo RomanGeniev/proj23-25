@@ -2,7 +2,9 @@ package com.example.proj23_25
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.asLiveData
 import com.example.proj23_25.databinding.ActivityMainBinding
+import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -12,6 +14,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val db = MainDb.getDb(this)
+        db.getBookDao().getAllBooks().asLiveData().observe(this){
+            binding.tvList.text = " "
+            it.forEach {
+                val text = "id: ${it.id}, author: ${it.author}, title ${it.title}\n"
+                binding.tvList.append(text)
+            }
+        }
 
         binding.button.setOnClickListener{
             val book = BookEntity(null,
@@ -22,9 +31,6 @@ class MainActivity : AppCompatActivity() {
             }.start()
 
         }
-
-
-
 
     }
 }
