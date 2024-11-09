@@ -32,5 +32,11 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        binding.button2.setOnClickListener{
+            Thread{
+                db.getBookDao().deleteBookDataById(binding.editTextText3.text.toString().toInt())
+            }.start()
+        }
+
     }
 }
